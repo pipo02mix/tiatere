@@ -11,21 +11,12 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 class FeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext
 {
     /**
-     * @Given I am in $page
-     */
-    public function iAmInThe($page)
-    {
-        $this->visitPath('/');
-    }
-
-    /**
      * @Given I am in the :arg1
      */
-    public function iAmInThe2($arg1)
+    public function iAmInThe($arg1)
     {
         $this->visitPath('/');
     }
-
 
     /**
      * @When I browse to :arg1 page

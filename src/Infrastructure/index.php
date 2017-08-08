@@ -1,4 +1,11 @@
 <?php
 
+require_once __DIR__.'/../../vendor/autoload.php';
 
-echo '<div class="container">hello</div>';
+$app = new Silex\Application();
+
+$app->get('/', function () use ($app) {
+    return '<div class="container">hello</div>';
+});
+
+$app->run();
