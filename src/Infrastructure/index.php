@@ -14,7 +14,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig');
+    return $app->redirect('/about-me');
 });
 
 $app->get('/about-me', function (Request $request) use ($app) {

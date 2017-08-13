@@ -1,21 +1,38 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="/Ui/Resources/css/spectre/dist/spectre.css">
-</head>
-<body>
-<section class="container grid-960">
-    <div class="columns">
-        {% block sidebar %}
-        {% endblock %}
-        {% block content %}
-        {% endblock %}
-    </div>
-</section>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="/Ui/Resources/css/spectre/dist/spectre.css">
+    </head>
+    <body>
+        <section class="section section-header bg-gray">
+            <section class="grid-header container grid-960">
+                <nav class="navbar">
+                    <section class="navbar-section">
+                        <a href="#sidebar" class="btn btn-lg btn-link btn-action"><i class="icon icon-menu"></i></a>
+                        <a href="/" class="navbar-brand mr-10">Tiatere</a>
+                    </section>
+                    <section class="navbar-section">
+                        <a href="https://github.com/pipo02mix" target="_blank" class="icon-svg"><img
+                                    src="/Ui/Resources/icons/github.svg" alt=""></a>
+                        <a href="https://twitter.com/pipo02mix" target="_blank" class="icon-svg"><img
+                                    src="/Ui/Resources/icons/twitter.svg" alt=""></a>
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <section class="container grid-960">
+            <div class="columns">
+                {% include 'sidebar.html.twig' %}
+                <div class="col-12 column">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </section>
+    </body>
 </html>
