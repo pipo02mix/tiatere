@@ -23,7 +23,7 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
      */
     public function iBrowseToPage($arg1)
     {
-        $this->visitPath(preg_replace('/\s+/', '-', $arg1).'.php');
+        $this->visitPath(preg_replace('/\s+/', '-', $arg1));
     }
 
     /**
@@ -31,7 +31,7 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
      */
     public function firstParagraphShouldContain($arg1)
     {
-        $text = $this->getSession()->getPage()->find('css', '.container')->getText();
+        $text = $this->getSession()->getPage()->find('css', 'h1')->getText();
 
         expect($text)->toBe($arg1);
     }
