@@ -31,7 +31,6 @@ $app->get('/about-me', function (Request $request) use ($app) {
 $app->post('/wh', function (Request $request) use ($app) {
     if (verifyRequest($request)) {
         echo shell_exec( 'cd '.dirname(__FILE__).'/../../ && /usr/bin/git reset --hard HEAD 2>&1 && /usr/bin/git pull 2>&1');
-        echo shell_exec('/etc/init.d/nginx reload 2>&1');
         return $app->json([], 201);
     }
     return $app->json([], 404);
