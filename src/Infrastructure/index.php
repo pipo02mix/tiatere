@@ -30,8 +30,8 @@ $app->get('/about-me', function (Request $request) use ($app) {
 
 $app->post('/wh', function (Request $request) use ($app) {
     if (verifyRequest($request)) {
-        exec('git pull');
-        exec('/etc/init.d/nginx reload');
+        shell_exec( 'cd '__DIR__.'/../../ && git reset --hard HEAD && git pull' );
+        shell_exec('/etc/init.d/nginx reload');
         return $app->json([], 201);
     }
     return $app->json([], 404);
