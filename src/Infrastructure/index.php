@@ -28,6 +28,14 @@ $app->get('/about-me', function (Request $request) use ($app) {
     return $app['twig']->render('about-me.html.twig');
 });
 
+$app->get('/curriculum', function (Request $request) use ($app) {
+    return $app['twig']->render('curriculum.html.twig');
+});
+
+$app->get('/contacto', function (Request $request) use ($app) {
+    return $app['twig']->render('contacto.html.twig');
+});
+
 $app->post('/wh', function (Request $request) use ($app) {
     if (verifyRequest($request)) {
         echo shell_exec( 'cd '.dirname(__FILE__).'/../../ && /usr/bin/git reset --hard HEAD 2>&1 && /usr/bin/git pull 2>&1');
