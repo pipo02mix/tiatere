@@ -55,7 +55,7 @@ $app->extend('twig', function($twig) {
     return $twig;
 });
 
-$app->error(function (\Exception $e, $code) use ($app) {
+$app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($code == 404) {
         return new Response($app['twig']->render('404.html.twig'), 404);
     }
