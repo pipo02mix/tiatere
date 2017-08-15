@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
+use \Symfony\Component\HttpFoundation\Response;
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
@@ -28,6 +29,10 @@ $app->get('/about-me', function (Request $request) use ($app) {
     return $app['twig']->render('about-me.html.twig');
 });
 
+$app->get('/blog', function (Request $request) use ($app) {
+    return $app['twig']->render('blog.html.twig');
+});
+
 $app->get('/curriculum', function (Request $request) use ($app) {
     return $app['twig']->render('curriculum.html.twig');
 });
@@ -51,7 +56,11 @@ $app->extend('twig', function($twig) {
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {
-    $app->json([$e->getMessage(), $code], 404);
+    if ($code == 404) {
+        return new Response($app['twig']->render('404.html.twig'), 404);
+    }
+
+    return new Response('We are sorry, but something went terribly wrong.', $code);
 });
 
 
