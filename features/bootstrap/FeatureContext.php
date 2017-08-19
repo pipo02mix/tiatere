@@ -31,9 +31,9 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
      */
     public function firstParagraphShouldContain($arg1)
     {
-        $text = $this->getSession()->getPage()->find('css', 'h1')->getText();
+        $text = $this->getSession()->getPage()->find('css', 'p')->getText();
 
-        expect($text)->toBe($arg1);
+        expect($text)->shouldContain($arg1);
     }
 
     /**
@@ -42,6 +42,27 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
     public function iSeeTheListOfTheLastEntries($number)
     {
         $entries = $this->getSession()->getPage()->findAll('css', '.blog-entry');
+
+        expect(count($entries))->toBe((int) $number);
+    }
+
+    /**
+     * @Then the header should contain :arg1
+     */
+    public function theHeaderShouldContain($arg1)
+    {
+
+        $text = $this->getSession()->getPage()->find('css', 'h1')->getText();
+
+        expect($text)->toBe($arg1);
+    }
+
+    /**
+     * @Then nav should contain :number social links
+     */
+    public function navShouldContainSocialLinks($number)
+    {
+        $entries = $this->getSession()->getPage()->findAll('css', '.navbar .social-link');
 
         expect(count($entries))->toBe((int) $number);
     }
