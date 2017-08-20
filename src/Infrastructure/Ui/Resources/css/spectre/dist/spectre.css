@@ -3033,9 +3033,11 @@ code {
   padding-right: 1rem;
 }
 .tile .tile-title {
+  background-color: white;
   line-height: 2rem;
 }
 .tile .tile-subtitle {
+  background-color: white;
   color: #bbc1cd;
   line-height: 2rem;
 }
