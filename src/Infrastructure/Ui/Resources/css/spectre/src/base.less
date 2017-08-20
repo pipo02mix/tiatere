@@ -13,12 +13,27 @@ html {
 }
 
 body {
-  background: @body-bg;
   color: @body-font-color;
   font-family: @body-font-family;
   font-size: @font-size;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
+
+  /* Dotted background */
+  background:
+          -moz-radial-gradient(black 3%, transparent 6%),
+          -moz-radial-gradient(black 3%, transparent 6%),
+          white;
+  background:
+          -webkit-radial-gradient(black 3%, transparent 6%),
+          -webkit-radial-gradient(black 3%, transparent 6%),
+          white;
+  background-position: 0 0, 20px 20px;
+
+  -webkit-background-size: 10px 10px;
+  -moz-background-size: 10px 10px;
+  background-size: 10px 10px;
+  /* End Dotted background */
 }
 
 a {

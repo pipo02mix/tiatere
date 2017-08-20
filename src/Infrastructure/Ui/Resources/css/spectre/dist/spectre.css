@@ -390,12 +390,16 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 body {
-  background: #fff;
+  /* Dotted background */
+  background: -webkit-radial-gradient(black 3%, transparent 6%), -webkit-radial-gradient(black 3%, transparent 6%), white;
+  background-position: 0 0, 20px 20px;
+  background-size: 10px 10px;
   color: #50596c;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   font-size: 1.4rem;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
+  /* End Dotted background */
 }
 a {
   color: #5764c6;
@@ -445,6 +449,11 @@ h6 {
 p {
   line-height: 2.4rem;
   margin: 0 0 1rem;
+}
+.highlited-paragraph {
+  background-color: white;
+  font-size: 2rem;
+  line-height: 4rem;
 }
 a,
 ins,
