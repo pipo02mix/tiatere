@@ -12,8 +12,8 @@
         "bossa/phpspec2-expect": "2.*"
     },
     "autoload": {
-        "psr-0": {
-             "": "src"
+        "psr-4": {
+             "Tiatere\\": "src/Tiatere"
         }
     },
     "config": {
@@ -29,6 +29,8 @@
     "require": {
         "silex/silex": "~2.0",
         "twig/twig": "^1.34",
-        "symfony/twig-bridge": "^3.3"
+        "symfony/twig-bridge": "^3.3",
+        "miniflux/picofeed": "@stable",
+        "twig/extensions": "^1.5"
     }
 }

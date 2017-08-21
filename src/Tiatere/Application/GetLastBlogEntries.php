@@ -1,9 +1,9 @@
 <?php
 
-namespace Application;
+namespace Tiatere\Application;
 
-use Domain\BlogPost;
-use Domain\BlogPostRepository;
+use Tiatere\Domain\BlogPost;
+use Tiatere\Domain\BlogPostRepository;
 
 class GetLastBlogEntries
 {
@@ -23,10 +23,7 @@ class GetLastBlogEntries
 
     public function execute($numberOfEntries)
     {
-        $blogEntries = [];
-        foreach (range(1, $numberOfEntries) as $index) {
-            $blogEntries[] = new BlogPost('title'.$index, 'content'.$index);
-        }
+        $blogEntries = $this->blogPostRepository->findLastEntries($numberOfEntries);
 
         return $blogEntries;
     }

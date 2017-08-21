@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Domain;
+namespace spec\Tiatere\Domain;
 
-use Domain\Biography;
+use Tiatere\Domain\Biography;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Application;
+namespace spec\Tiatere\Application;
 
-use Application\GetLastBlogEntries;
-use Domain\BlogPost;
-use Domain\BlogPostRepository;
+use Tiatere\Application\GetLastBlogEntries;
+use Tiatere\Domain\BlogPost;
+use Tiatere\Domain\BlogPostRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -17,7 +17,7 @@ class GetLastBlogEntriesSpec extends ObjectBehavior
     {
         $blogEntry = new BlogPost( 'title1', 'content1');
 
-        $blogPostRepository->findLastEntries(3)->willReturn($blogEntry);
+        $blogPostRepository->findLastEntries(3)->willReturn([$blogEntry, $blogEntry, $blogEntry]);
         $this->beConstructedWith($blogPostRepository);
 
         $this->execute(3)

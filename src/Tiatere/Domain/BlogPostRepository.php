@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain;
+namespace Tiatere\Domain;
 
 interface BlogPostRepository
 {
@@ -10,4 +10,10 @@ interface BlogPostRepository
      * @return mixed
      */
     public function findLastEntries($numberOfEntries);
+
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public function findBySlug($slug);
 }

@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Blog</h1>
+    <div class="blog-entry">
+        <h2>{{ entry.title }}</h2>
+        <p> <icon class="icon icon-time"></icon>&nbsp; {{ entry.createdat | date("m/d/Y") }}</p>
+        <div>{{ entry.content | raw }}</div>
+        <br>
+        <a href="/blog" class="float-right">&lt; Blog</a>
+    </div>
+{% endblock %}
