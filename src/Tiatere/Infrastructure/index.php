@@ -2,8 +2,17 @@
 
 namespace Tiatere\Infrastructure;
 
+use Silex\Provider\FormServiceProvider;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Tiatere\Application\ContactCommand;
+use Tiatere\Application\ContactRequest;
 use Tiatere\Application\GetBlogEntryBySlug;
 use Tiatere\Application\GetLastBlogEntries;
 
@@ -16,8 +25,18 @@ $app['debug'] = true;
 
 $app['blog_repository'] = new \Tiatere\Infrastructure\Domain\MediumBlogRepository();
 
+$app->register(new \Silex\Provider\SwiftmailerServiceProvider());
+
+$app->register(new \Silex\Provider\ValidatorServiceProvider());
+
 $app->register(new \Silex\Provider\TwigServiceProvider(), array(
   'twig.path' => __DIR__.'/Ui/Twig/views',
+));
+
+$app->register(new FormServiceProvider());
+$app->register(new \Silex\Provider\TranslationServiceProvider(), array(
+  'translator.domains' => array(),
+  'locale' => 'es'
 ));
 
 $app['twig'] = $app->extend('twig', function($twig, $app) {
@@ -28,7 +47,21 @@ $app['twig'] = $app->extend('twig', function($twig, $app) {
     return $twig;
 });
 
-$app->before(function (Request $request) {
+$app['event_dispatcher'] = function ($app) {
+    return new EventDispatcher();
+};
+
+$app->before(function (Request $request) use ($app) {
+    $app['event_dispatcher']->addListener('contact.requested', function (Event $event) use ($app) {
+        $message = (new \Swift_Message())
+          ->setSubject('Tiatere Feedback '.$event->fullname())
+          ->setFrom(array('noreply@tiatere.es'))
+          ->setTo(array('info@tiatere.es'))
+          ->setBody($event->query());
+
+        $app['mailer']->send($message);
+    });
+
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
@@ -57,8 +90,45 @@ $app->get('/curriculum', function (Request $request) use ($app) {
     return $app['twig']->render('curriculum.html.twig');
 });
 
-$app->get('/contacto', function (Request $request) use ($app) {
-    return $app['twig']->render('contacto.html.twig');
+$app->match('/contact', function (Request $request) use ($app) {
+    $data = array(
+      'persona' => '',
+      'email' => '',
+      'consulta' => '',
+    );
+
+    $form = $app['form.factory']->createBuilder(FormType::class, $data)
+      ->add('persona', TextType::class)
+      ->add('email')
+      ->add('consulta', TextareaType::class)
+      ->add('submit', SubmitType::class)
+      ->getForm();
+
+    $form->handleRequest($request);
+
+    if ($form->isValid()) {
+        $data = $form->getData();
+        $commandHandler = new ContactRequest(
+          $app['validator'],
+          $app['event_dispatcher']);
+
+        $commandHandler->execute(
+          new ContactCommand(
+              $data['persona'],
+              $data['email'],
+              $data['consulta']
+          )
+        );
+
+        return $app->redirect('/contact-done');
+    }
+
+    return $app['twig']->render('contact.html.twig', array('form' => $form->createView()));
+});
+
+$app->get('/contact-done', function (Request $request) use ($app) {
+
+    return $app['twig']->render('contact_done.html.twig');
 });
 
 $app->post('/wh', function (Request $request) use ($app) {
@@ -76,7 +146,6 @@ $app->extend('twig', function($twig) {
 });
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-    var_dump($e->getMessage());die;
     if ($code == 404) {
         return new Response($app['twig']->render('404.html.twig'), 404);
     }
