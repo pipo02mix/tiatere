@@ -140,7 +140,7 @@ $app->post('/wh', function (Request $request) use ($app) {
 });
 
 $app->extend('twig', function($twig) {
-    $twig->addGlobal('title', 'Tiatere');
+    $twig->addGlobal('title', 'Tiatere - Un desarrollador web full-stack con afición por hacer las cosas bien');
 
     return $twig;
 });
