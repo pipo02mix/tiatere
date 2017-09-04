@@ -160,7 +160,6 @@ $app->extend('translator', function($translator) {
 });
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-    var_dump($e->getMessage());die;
     if ($code == 404) {
         return new Response($app['twig']->render('404.html.twig'), 404);
     }

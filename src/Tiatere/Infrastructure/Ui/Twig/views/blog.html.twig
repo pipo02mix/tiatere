@@ -4,7 +4,7 @@
     <h1>Blog</h1>
     {% for entry in entries %}
         <div class="blog-entry">
-            <h3><a href="/blog/{{ entry.slug }}">{{ entry.title }}</a></h3>
+            <h3><a href="/{{ app.request.locale }}/blog/{{ entry.slug }}">{{ entry.title }}</a></h3>
             <p> <icon class="icon icon-time"></icon>&nbsp; {{ entry.createdat | date("m/d/Y") }}</p>
             <p>{{ entry.content | striptags | truncate(200, true) }}</p>
         </div>

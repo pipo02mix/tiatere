@@ -36,7 +36,12 @@ class MediumBlogRepository implements BlogPostRepository
 
             $feed = $parser->execute();
             foreach ($feed->getItems() as $item) {
-                $blogEntries[] = new BlogPost($item->getTitle(), $item->getContent(), $item->getDate());
+                if (in_array('Post', $item->getCategories()) ||
+                  in_array( 'javascript', $item->getCategories()) ||
+                  in_array('erlang', $item->getCategories())
+                ) {
+                    $blogEntries[] = new BlogPost($item->getTitle(), $item->getContent(), $item->getDate());
+                }
             }
         } catch (Exception $e) {
             return [];
