@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Tiatere\Application\ContactCommand;
 use Tiatere\Application\ContactRequest;
 use Tiatere\Application\GetBlogEntryBySlug;
@@ -29,13 +30,15 @@ $app->register(new \Silex\Provider\SwiftmailerServiceProvider());
 
 $app->register(new \Silex\Provider\ValidatorServiceProvider());
 
+$app->register(new \Silex\Provider\LocaleServiceProvider());
+
 $app->register(new \Silex\Provider\TwigServiceProvider(), array(
   'twig.path' => __DIR__.'/Ui/Twig/views',
 ));
 
 $app->register(new FormServiceProvider());
 $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
-  'translator.domains' => array(),
+  'translation.class_path'    => __DIR__.'/../lib/vendor/symfony/src',
   'locale' => 'es'
 ));
 
@@ -62,35 +65,37 @@ $app->before(function (Request $request) use ($app) {
         $app['mailer']->send($message);
     });
 
+    $app['request'] = $request;
+
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
     }
 });
 
-$app->get('/', function () use ($app) {
-    return $app->redirect('/about-me');
-});
+$app->get('/{_locale}', function () use ($app) {
+    return $app->redirect('/'.$app['locale'].'/about-me');
+})->value('_locale', 'es');
 
-$app->get('/about-me', function () use ($app) {
+$app->get('/{_locale}/about-me', function () use ($app) {
     return $app['twig']->render('about-me.html.twig');
 });
 
-$app->get('/blog', function () use ($app) {
+$app->get('/{_locale}/blog', function () use ($app) {
     $entries = (new GetLastBlogEntries($app['blog_repository']))->execute(3);
     return $app['twig']->render('blog.html.twig', ['entries' => $entries]);
 });
 
-$app->get('/blog/{slug}', function ($slug) use ($app) {
+$app->get('/{_locale}/blog/{slug}', function ($slug) use ($app) {
     $entry = (new GetBlogEntryBySlug($app['blog_repository']))->execute($slug);
     return $app['twig']->render('blog_entry.html.twig', ['entry' => $entry]);
 });
 
-$app->get('/curriculum', function (Request $request) use ($app) {
+$app->get('/{_locale}/curriculum', function (Request $request) use ($app) {
     return $app['twig']->render('curriculum.html.twig');
 });
 
-$app->match('/contact', function (Request $request) use ($app) {
+$app->match('/{_locale}/contact', function (Request $request) use ($app) {
     $data = array(
       'persona' => '',
       'email' => '',
@@ -126,7 +131,7 @@ $app->match('/contact', function (Request $request) use ($app) {
     return $app['twig']->render('contact.html.twig', array('form' => $form->createView()));
 });
 
-$app->get('/contact-done', function (Request $request) use ($app) {
+$app->get('/{_locale}/contact-done', function (Request $request) use ($app) {
 
     return $app['twig']->render('contact_done.html.twig');
 });
@@ -145,7 +150,17 @@ $app->extend('twig', function($twig) {
     return $twig;
 });
 
+$app->extend('translator', function($translator) {
+    $translator->addLoader('yaml', new YamlFileLoader());
+
+    $translator->addResource('yaml', __DIR__.'/Ui/Resources/locales/en.yaml', 'en');
+    $translator->addResource('yaml', __DIR__.'/Ui/Resources/locales/es.yaml', 'es');
+
+    return $translator;
+});
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
+    var_dump($e->getMessage());die;
     if ($code == 404) {
         return new Response($app['twig']->render('404.html.twig'), 404);
     }

@@ -14,9 +14,29 @@
                 <nav class="navbar">
                     <section class="navbar-section">
                         <a href="#sidebar" class="btn btn-lg btn-link btn-action"><i class="icon icon-menu"></i></a>
-                        <a href="/" class="navbar-brand mr-10"><img src="/Ui/Resources/images/logo.png" class="mt-10"></a>
+                        <a href="/" class="navbar-brand mr-10">
+                            <div class="popover popover-bottom tile">
+                                <img src="/Ui/Resources/images/logo.png">
+                                <div class="popover-container">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p class="tile-subtitle text-size-mini text-gray">{{ 'tiatere_why' | trans }}</p>
+                                            <p class="tile-subtitle text-size-mini text-gray">{{ 'tiatere_why_explanation' | trans }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </a>
                     </section>
+
                     <section class="navbar-section">
+                        <div class="float-right">
+                            <a href="/es" class="">es</a>
+                            &nbsp;|&nbsp;
+                            <a href="/en" class="">en</a>
+                            &nbsp;&nbsp;
+                        </div>
                         <a href="https://github.com/pipo02mix" target="_blank" class="social-link icon-svg"><img
                                     src="/Ui/Resources/icons/github.svg" alt=""></a>
                         <a href="https://twitter.com/pipo02mix" target="_blank" class="social-link icon-svg"><img

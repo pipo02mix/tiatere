@@ -3,16 +3,16 @@
     <div id="sidebar" class="docs-sidebar column col-3">
         <ul class="docs-nav nav">
             <li class="nav-item">
-                <a href="/about-me">About me</a>
+                <a href="/{{ app.request.locale }}/about-me">About me</a>
             </li>
             <li class="nav-item">
-                <a href="/blog">Blog</a>
+                <a href="/{{ app.request.locale }}/blog">Blog</a>
             </li>
             <li class="nav-item">
-                <a href="/curriculum">Curriculum</a>
+                <a href="/{{ app.request.locale }}/curriculum">Curriculum</a>
             </li>
             <li class="nav-item">
-                <a href="/contact">Contacto</a>
+                <a href="/{{ app.request.locale }}/contact">Contacto</a>
             </li>
         </ul>
     </div>

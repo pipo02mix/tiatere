@@ -2,12 +2,8 @@
 
 {% block content %}
     <h1>Fernando Ripoll Lafuente</h1>
-    <p class="highlited-paragraph">Soy un ingeniero del software con gusto por hacer las cosas bien hechas. Trabajo con diferentes tecnologías
-    que me ayudan a realizar mi trabajo: PHP, Nodejs, golang, ruby, kubernetes y HTML5. He trabajado con frontend developer
-    disfrutando creando interfaces interactivas gracias al boom de frameworks javascript. También he lidiado con backend,
-    creando alguna API rest y construyendo micro servicios para aislar y dividir al lógica de negocio en diferentes bundle
-    contexts. Me gusta mucho aprender sobre arquitectura de aplicaciones y patrones software (DDD fan). Además Además
-    últimamente he mejorado mis habilidades con devops ya que toda nuestra infraestructura estaba sobre kubernetes (docker)
-    y he colaborado en la construcción de toda ella.</p>
+    <p class="highlited-paragraph">
+        {{ 'aboutme' | trans }}
+    </p>
     <img src="/Ui/Resources/images/creatividad.png"/>
 {% endblock %}
