@@ -1,26 +1,26 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Contacto</h1>
-    <p>Déjame un mensaje con la consulta o proposición y no tardaré en contestarte</p>
+    <h1>{{ 'contact' | trans }}</h1>
+    <p>{{ 'contact_description' | trans }}</p>
     {{ form_start(form) }}
     <div class="form-group">
-        {{ form_label(form.persona, 'Quién eres?', {'label_attr': {'class': 'form-label'}})
+        {{ form_label(form.persona, 'who', {'label_attr': {'class': 'form-label'}})
         }}
         {{ form_widget(form.persona, { 'attr': {'class': 'form-input'}}) }}
     </div>
     <div class="form-group">
-        {{ form_label(form.email, 'Tu email?', {'label_attr': {'class': 'form-label'}})
+        {{ form_label(form.email, 'email', {'label_attr': {'class': 'form-label'}})
         }}
         {{ form_widget(form.email, { 'attr': {'class': 'form-input'}}) }}
     </div>
     <div class="form-group">
-        {{ form_label(form.consulta, 'Qué es lo que quieres?', {'label_attr': {'class': 'form-label'}})
+        {{ form_label(form.consulta, 'query', {'label_attr': {'class': 'form-label'}})
         }}
         {{ form_widget(form.consulta, { 'attr': {'class': 'form-input', 'rows': '5' }}) }}
     </div>
     <div>
-        {{ form_widget(form.submit, { 'label': 'Envía', 'attr': {'class': 'btn btn-primary'} }) }}
+        {{ form_widget(form.submit, { 'label': 'send_button', 'attr': {'class': 'btn btn-primary'} }) }}
     </div>
     {{ form_end(form) }}
     </form>

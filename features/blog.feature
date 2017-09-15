@@ -6,7 +6,7 @@ Feature: Blog roll
   Scenario: See blog roll
     Given I am in the "homepage"
     When I browse to "blog" page
-    Then I see the list of the last 2 entries
+    Then I see the list of the last 3 entries
 
 
 
