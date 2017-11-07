@@ -50,12 +50,10 @@ jobs:
           name: Start the server
           command: php -S localhost:8080 -t src/TiaTere/Infrastructure
           background: true
-
       - save_cache:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-
       - run: ./bin/behat
 
 workflows:
