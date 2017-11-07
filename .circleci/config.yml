@@ -46,13 +46,16 @@ jobs:
       - run: php composer.phar self-update
       - run: sudo mv composer.phar /usr/local/bin/composer
       - run: composer install -n --prefer-dist
+      - run:
+          name: Start the server
+          command: php -S localhost:8080 -t src/TiaTere/Infrastructure
+          background: true
 
       - save_cache:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
 
-      - run: ./bin/server.sh &
       - run: ./bin/behat
 
 workflows:
@@ -61,3 +64,7 @@ workflows:
     jobs:
       - unit-tests
       - acceptance-tests
+      - deploy:
+        requires:
+          - unit-tests
+          - acceptance-tests
