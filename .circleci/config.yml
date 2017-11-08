@@ -3,9 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1.5-browsers
-
     working_directory: ~/tiatere
-
     steps:
       - checkout
       - restore_cache:
@@ -29,9 +27,7 @@ jobs:
   unit-tests:
     docker:
       - image: circleci/php:7.1.5-browsers
-
     working_directory: ~/tiatere
-
     steps:
       - checkout
       - restore_cache:
@@ -69,7 +65,3 @@ workflows:
           - acceptance-tests
       - unit-tests
       - acceptance-tests
-      # - deploy:
-      #   requires:
-      #     - unit-tests
-      #     - acceptance-tests
