@@ -62,7 +62,7 @@ workflows:
     jobs:
       - unit-tests
       - acceptance-tests
-      - deploy:
-        requires:
-          - unit-tests
-          - acceptance-tests
+      # - deploy:
+      #   requires:
+      #     - unit-tests
+      #     - acceptance-tests
