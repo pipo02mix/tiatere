@@ -52,7 +52,8 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
           name: Start the server
-          command: php -S localhost:8080 -t ./src/TiaTere/Infrastructure
+          command: |
+            php -S localhost:8080 -t $CIRCLE_WORKING_DIRECTORY/src/TiaTere/Infrastructure
           background: true
       - run: ./bin/behat
 
