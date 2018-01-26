@@ -5,4 +5,4 @@
 
 My Personal website created wuth love
 
-DDD, CI, BDD, ... (I dont find more cool acronyms)
+DDD, CI, BDD, ... (I dont find more cool acronyms).
