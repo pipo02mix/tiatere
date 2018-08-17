@@ -1,12 +1,9 @@
 aboutme: >
-  I am a software engineer who likes making things right. I have worked with a different technology stacks like:
-  PHP, Node, golang, ruby, kubernetes, MongoDB and HTML5. As frontend developer, I have created some rich user interfaces thanks to
-  some javascript frameworks as Angular or Backbone. In the other hand, as backend developer I have built some rest APIs and middleware
-  components, although nowadays I have involved trying to apply DDD concepts over our micro services platform.
-  Further, due to my current job I have improved drastically my skills as devOps, operating some kubernetes clusters,
-  making repetitive tasks run automatically and getting CD/CI to our work days.
+  I am a software engineer who likes making things right. I have worked with a different set of technologies like:
+  PHP, Node, golang, ruby, kubernetes, MongoDB or HTML5. My early days as a developer I was focussed in the frontend. I have created some rich user interfaces thanks to some javascript frameworks as Angular or Backbone. Over time I moved my interests to backend development. I have been involved in building some rest APIs and middleware components. Nowadays, I have walked away from pure development, and I have started to work more in processes and automation.
+  I really like to read and practice about 'Domain Driven Design' and DevOps concepts. At the same time, I love to share knowledge either in meetups or workshops.
 tiatere_why: "Why tiatere?"
-tiatere_why_explanation: "Because I created a personal brand with the values that represent my aunt Tere (pasion, goodness, effort)"
+tiatere_why_explanation: "Because I created a personal brand with the values that represent my aunt Teresa (pasion, goodness, effort)"
 about-me: About me
 projects: Projects
 blog: Blog
