@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { localePaths, useTranslations } from "../../i18n.js";
+import { projects } from "../../projects.js";
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.params;
+const t = useTranslations(locale);
+---
+<Layout locale={locale} title={t("projects")}>
+    <h1>{t("projects")}</h1>
+    <p>{t("projects_intro")} <a href="https://github.com/pipo02mix">GitHub</a>.</p>
+    <ol class="entries">
+        {projects.map((project) => (
+            <li>
+                <p class="meta">{project.year}</p>
+                <h3><a href={project.url}>{project.name}</a></h3>
+                <p class="entries-description">{project.description[locale]}</p>
+            </li>
+        ))}
+    </ol>
+</Layout>

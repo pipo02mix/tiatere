@@ -1,0 +1,29 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { localePaths, useTranslations } from "../../i18n.js";
+import { talks } from "../../talks.js";
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.params;
+const t = useTranslations(locale);
+const text = (value) => (typeof value === "string" ? value : value[locale]);
+---
+<Layout locale={locale} title={t("talks")}>
+    <h1>{t("talks")}</h1>
+    <p>{t("talks_intro")}</p>
+    <ol class="entries">
+        {talks.map((talk) => (
+            <li>
+                <p class="meta">{talk.year}</p>
+                <h3>{talk.title}</h3>
+                <p class="entries-org">{text(talk.event)}</p>
+                {talk.links.length > 0 && (
+                    <p class="entries-links">
+                        {talk.links.map((link) => <a href={link.url}>{t(`link_${link.label}`)}</a>)}
+                    </p>
+                )}
+            </li>
+        ))}
+    </ol>
+</Layout>
