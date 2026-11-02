@@ -8,6 +8,6 @@ const { locale } = Astro.params;
 const t = useTranslations(locale);
 ---
 <Layout locale={locale} title={t("contact")}>
-    <h1>Contacto</h1>
-    <p>Encantado de conocerte, te respondo en breve!</p>
+    <h1>{t("contact")}</h1>
+    <p>{t("contact_done")}</p>
 </Layout>
