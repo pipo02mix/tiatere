@@ -7,7 +7,7 @@ export const getStaticPaths = localePaths;
 const { locale } = Astro.params;
 const t = useTranslations(locale);
 ---
-<Layout locale={locale}>
+<Layout locale={locale} title={t("contact")}>
     <h1>{t("contact")}</h1>
     <p>{t("contact_description")}</p>
     <form method="post" action="/api/contact">

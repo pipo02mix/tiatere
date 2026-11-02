@@ -1,12 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { localePaths } from "../../i18n.js";
+import { localePaths, useTranslations } from "../../i18n.js";
 
 export const getStaticPaths = localePaths;
 
 const { locale } = Astro.params;
+const t = useTranslations(locale);
 ---
-<Layout locale={locale}>
+<Layout locale={locale} title={t("curriculum")}>
     <h1>Trayectoria</h1>
     <div class="timeline mt-10">
         <div class="timeline-item">

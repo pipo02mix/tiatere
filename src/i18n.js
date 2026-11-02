@@ -16,6 +16,8 @@ const translations = {
     email: "Tu email?",
     query: "Qué es lo que quieres?",
     send_button: "Envía",
+    site_description:
+      "Fernando Ripoll, ingeniero de software. Blog, trayectoria y contacto.",
   },
   en: {
     aboutme:
@@ -33,6 +35,7 @@ const translations = {
     email: "Your email?",
     query: "What do you want?",
     send_button: "Send",
+    site_description: "Fernando Ripoll, software engineer. Blog, resume and contact.",
   },
 };
 

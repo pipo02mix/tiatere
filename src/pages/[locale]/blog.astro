@@ -1,14 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { localePaths } from "../../i18n.js";
+import { localePaths, useTranslations } from "../../i18n.js";
 import { excerpt, formatDate, getListedPosts } from "../../medium.js";
 
 export const getStaticPaths = localePaths;
 
 const { locale } = Astro.params;
+const t = useTranslations(locale);
 const entries = await getListedPosts(3);
 ---
-<Layout locale={locale}>
+<Layout locale={locale} title={t("blog")}>
     <h1>Blog</h1>
     {entries.map((entry) => (
         <div class="blog-entry">

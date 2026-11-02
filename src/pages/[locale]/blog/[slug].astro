@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { locale } = Astro.params;
 const { entry } = Astro.props;
 ---
-<Layout locale={locale}>
+<Layout locale={locale} title={entry.title}>
     <h1>Blog</h1>
     <div class="blog-entry">
         <h2>{entry.title}</h2>
