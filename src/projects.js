@@ -14,6 +14,24 @@ export const projects = [
     url: "https://github.com/giantswarm/envoy-gateway-examples",
   },
   {
+    name: "debug-toolbox",
+    year: "2024",
+    description: {
+      es: "Una aplicación con herramientas para depurar clústeres de Kubernetes, en Giant Swarm.",
+      en: "An app with tools to debug Kubernetes clusters, at Giant Swarm.",
+    },
+    url: "https://github.com/giantswarm/debug-toolbox",
+  },
+  {
+    name: "kubernetes-gpu",
+    year: "2018",
+    description: {
+      es: "Una receta para preparar un clúster de Kubernetes para trabajar con instancias GPU, en Giant Swarm.",
+      en: "A recipe to prepare a Kubernetes cluster to work with GPU instances, at Giant Swarm.",
+    },
+    url: "https://github.com/giantswarm/kubernetes-gpu",
+  },
+  {
     name: "build-your-own-platform",
     year: "2024",
     description: {
