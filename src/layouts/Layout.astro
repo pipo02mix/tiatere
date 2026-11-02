@@ -6,7 +6,9 @@ import { useTranslations } from "../i18n.js";
 const { locale, title } = Astro.props;
 const t = useTranslations(locale);
 const pages = ["about-me", "blog", "curriculum", "contact"];
-const current = pages.find((page) => Astro.url.pathname.startsWith(`/${locale}/${page}`));
+const path = Astro.url.pathname.replace(/(\.html|\/)$/, "");
+const current = path === `/${locale}` ? "about-me" : pages.find((page) => path.startsWith(`/${locale}/${page}`));
+const href = (page) => (page === "about-me" ? `/${locale}` : `/${locale}/${page}`);
 ---
 <!doctype html>
 <html lang={locale}>
@@ -20,10 +22,10 @@ const current = pages.find((page) => Astro.url.pathname.startsWith(`/${locale}/$
     <body>
         <div class="page">
             <header class="site-header">
-                <a href={`/${locale}/about-me`} class="site-name">Fernando Ripoll</a>
+                <a href={`/${locale}`} class="site-name">Fernando Ripoll</a>
                 <nav class="site-nav">
                     {pages.map((page) => (
-                        <a href={`/${locale}/${page}`} aria-current={current === page ? "page" : undefined}>{t(page)}</a>
+                        <a href={href(page)} aria-current={current === page ? "page" : undefined}>{t(page)}</a>
                     ))}
                     <span class="lang">
                         <a href="/es" aria-current={locale === "es" ? "true" : undefined}>es</a>
