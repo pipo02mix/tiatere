@@ -2,9 +2,9 @@
 
 My personal website, in Spanish and English. It runs on Cloudflare Workers.
 
-The pages are static HTML built with [Astro](https://astro.build). Blog posts come from the
-[Medium feed](https://medium.com/feed/@tiatere) when the site is built, so new posts show up after
-the next deploy. A small Worker in `worker/index.js` serves the pages and handles the contact form.
+The pages are static HTML built with [Astro](https://astro.build). Blog posts are Markdown files in
+`src/content/blog`. To publish one, add a file there with a `title`, `date` and `description` at the
+top, and deploy. The file name becomes the post's URL. A small Worker in `worker/index.js` serves the pages and handles the contact form.
 It sends each message to `info@tiatere.es` through [Resend](https://resend.com).
 
 ## Set up Resend
