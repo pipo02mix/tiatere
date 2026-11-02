@@ -20,6 +20,9 @@ const translations = {
     email: "Tu email?",
     query: "Qué es lo que quieres?",
     send_button: "Envía",
+    experience: "Experiencia",
+    education: "Formación",
+    download_pdf: "Descargar PDF",
     site_description:
       "Fernando Ripoll, Solution Architect en Giant Swarm. Blog, trayectoria y contacto.",
   },
@@ -42,6 +45,9 @@ const translations = {
     email: "Your email?",
     query: "What do you want?",
     send_button: "Send",
+    experience: "Experience",
+    education: "Education",
+    download_pdf: "Download PDF",
     site_description: "Fernando Ripoll, Solution Architect at Giant Swarm. Blog, resume and contact.",
   },
 };
