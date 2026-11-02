@@ -19,13 +19,13 @@ const sections = [
     {sections.map((section) => (
         <>
             <h2 class="section-label">{section.label}</h2>
-            <ol class="resume">
+            <ol class="entries">
                 {section.entries.map((entry) => (
                     <li>
                         <p class="meta">{text(entry.period)}</p>
                         <h3>{text(entry.title)}</h3>
-                        <p class="resume-org">{entry.org}</p>
-                        {entry.description && <p class="resume-description">{text(entry.description)}</p>}
+                        <p class="entries-org">{entry.org}</p>
+                        {entry.description && <p class="entries-description">{text(entry.description)}</p>}
                     </li>
                 ))}
             </ol>

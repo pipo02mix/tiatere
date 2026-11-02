@@ -5,7 +5,7 @@ import { useTranslations } from "../i18n.js";
 
 const { locale, title } = Astro.props;
 const t = useTranslations(locale);
-const pages = ["about-me", "blog", "curriculum", "contact"];
+const pages = ["about-me", "blog", "talks", "projects", "curriculum", "contact"];
 const path = Astro.url.pathname.replace(/(\.html|\/)$/, "");
 const current = path === `/${locale}` ? "about-me" : pages.find((page) => path.startsWith(`/${locale}/${page}`));
 const href = (page) => (page === "about-me" ? `/${locale}` : `/${locale}/${page}`);

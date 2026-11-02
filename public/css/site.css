@@ -221,16 +221,16 @@ pre {
   gap: 16px;
 }
 
-/* Resume */
+/* Resume, talks and projects */
 
-.resume {
+.entries {
   margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--line);
 }
 
-.resume li {
+.entries li {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -238,16 +238,27 @@ pre {
   border-bottom: 1px solid var(--line);
 }
 
-.resume h3 {
+.entries h3 {
   font-size: 20px;
 }
 
-.resume-org {
+.entries-org {
   font-size: 15px;
 }
 
-.resume-description {
+.entries-description {
   margin-top: 8px;
+}
+
+.entries h3 a {
+  text-decoration: none;
+}
+
+.entries-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 15px;
 }
 
 /* Contact form */
@@ -326,7 +337,7 @@ form {
     display: none;
   }
 
-  .resume li {
+  .entries li {
     break-inside: avoid;
   }
 }
