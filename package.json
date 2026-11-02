@@ -8,9 +8,6 @@
     "preview": "astro build && wrangler dev",
     "deploy": "astro build && wrangler deploy"
   },
-  "dependencies": {
-    "mimetext": "^3.0.24"
-  },
   "devDependencies": {
     "astro": "^5.13.0",
     "fast-xml-parser": "^5.2.0",

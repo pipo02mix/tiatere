@@ -5,12 +5,23 @@ My personal website, in Spanish and English. It runs on Cloudflare Workers.
 The pages are static HTML built with [Astro](https://astro.build). Blog posts come from the
 [Medium feed](https://medium.com/feed/@tiatere) when the site is built, so new posts show up after
 the next deploy. A small Worker in `worker/index.js` serves the pages and handles the contact form.
-It sends each message to `info@tiatere.es` through Cloudflare Email Routing.
+It sends each message to `info@tiatere.es` through [Resend](https://resend.com).
 
-## Set up Cloudflare
+## Set up Resend
 
-The contact form needs Email Routing on the `tiatere.es` zone. First, turn on Email Routing for
-the zone in the Cloudflare dashboard. Then add `info@tiatere.es` as a verified destination address.
+First, add `tiatere.es` as a domain in Resend and create its DNS records in Cloudflare. Then
+create a Resend API key with sending access for that domain. Finally, store the key as a Worker
+secret:
+
+```sh
+npx wrangler secret put RESEND_API_KEY
+```
+
+For `npm run preview`, put the key in a `.dev.vars` file instead:
+
+```sh
+RESEND_API_KEY=re_...
+```
 
 ## Develop
 
@@ -28,8 +39,7 @@ To run the whole site with the Worker, use:
 npm run preview
 ```
 
-Note that `wrangler dev` doesn't send real email. It writes each message to a local file and prints
-its path.
+Note that this sends real email through Resend.
 
 ## Deploy
 

@@ -3,16 +3,9 @@
   "name": "tiatere",
   "main": "worker/index.js",
   "compatibility_date": "2025-10-01",
-  "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page"
-  },
-  "send_email": [
-    {
-      "name": "CONTACT_EMAIL",
-      "destination_address": "info@tiatere.es"
-    }
-  ]
+  }
 }
