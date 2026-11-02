@@ -1,0 +1,48 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/newsreader/opsz.css";
+import { useTranslations } from "../i18n.js";
+
+const { locale, title } = Astro.props;
+const t = useTranslations(locale);
+const pages = ["about-me", "blog", "curriculum", "contact"];
+const path = Astro.url.pathname.replace(/(\.html|\/)$/, "");
+const current = path === `/${locale}` ? "about-me" : pages.find((page) => path.startsWith(`/${locale}/${page}`));
+const href = (page) => (page === "about-me" ? `/${locale}` : `/${locale}/${page}`);
+---
+<!doctype html>
+<html lang={locale}>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{title ? `Fernando Ripoll · ${title}` : "Fernando Ripoll"}</title>
+        <meta name="description" content={t("site_description")}>
+        <link rel="stylesheet" href="/css/site.css">
+    </head>
+    <body>
+        <div class="page">
+            <header class="site-header">
+                <a href={`/${locale}`} class="site-name">Fernando Ripoll</a>
+                <nav class="site-nav">
+                    {pages.map((page) => (
+                        <a href={href(page)} aria-current={current === page ? "page" : undefined}>{t(page)}</a>
+                    ))}
+                    <span class="lang">
+                        <a href="/es" aria-current={locale === "es" ? "true" : undefined}>es</a>
+                        /
+                        <a href="/en" aria-current={locale === "en" ? "true" : undefined}>en</a>
+                    </span>
+                </nav>
+            </header>
+            <main>
+                <slot />
+            </main>
+            <footer class="site-footer">
+                <a href="https://github.com/pipo02mix">GitHub</a>
+                <a href="https://www.linkedin.com/in/fernando-ripoll-lafuente/">LinkedIn</a>
+                <a href="https://twitter.com/pipo02mix">Twitter</a>
+                <a href="mailto:info@tiatere.es">info@tiatere.es</a>
+            </footer>
+        </div>
+    </body>
+</html>
