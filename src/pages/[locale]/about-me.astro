@@ -1,0 +1,16 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { localePaths, useTranslations } from "../../i18n.js";
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.params;
+const t = useTranslations(locale);
+---
+<Layout locale={locale}>
+    <h1>Fernando Ripoll Lafuente</h1>
+    <p class="highlited-paragraph">
+        {t("aboutme")}
+    </p>
+    <img src="/images/creatividad.png"/>
+</Layout>

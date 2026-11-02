@@ -1,0 +1,19 @@
+{
+  "name": "tiatere",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && wrangler dev",
+    "deploy": "astro build && wrangler deploy"
+  },
+  "dependencies": {
+    "mimetext": "^3.0.24"
+  },
+  "devDependencies": {
+    "astro": "^5.13.0",
+    "fast-xml-parser": "^5.2.0",
+    "wrangler": "^4.20.0"
+  }
+}

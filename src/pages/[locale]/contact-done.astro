@@ -1,0 +1,12 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { localePaths } from "../../i18n.js";
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.params;
+---
+<Layout locale={locale}>
+    <h1>Contacto</h1>
+    <p>Encantado de conocerte, te respondo en breve!</p>
+</Layout>

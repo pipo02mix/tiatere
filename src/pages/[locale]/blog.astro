@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { localePaths } from "../../i18n.js";
+import { excerpt, formatDate, getListedPosts } from "../../medium.js";
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.params;
+const entries = await getListedPosts(3);
+---
+<Layout locale={locale}>
+    <h1>Blog</h1>
+    {entries.map((entry) => (
+        <div class="blog-entry">
+            <h3><a href={`/${locale}/blog/${entry.slug}`}>{entry.title}</a></h3>
+            <p> <icon class="icon icon-time"></icon>&nbsp; {formatDate(entry.date)}</p>
+            <p set:html={excerpt(entry.content)} />
+        </div>
+    ))}
+</Layout>

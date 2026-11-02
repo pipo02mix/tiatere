@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { localePaths, useTranslations } from "../../i18n.js";
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.params;
+const t = useTranslations(locale);
+---
+<Layout locale={locale}>
+    <h1>{t("contact")}</h1>
+    <p>{t("contact_description")}</p>
+    <form method="post" action="/api/contact">
+        <input type="hidden" name="locale" value={locale}>
+        <div class="form-group">
+            <label class="form-label" for="persona">{t("who")}</label>
+            <input class="form-input" type="text" id="persona" name="persona" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="email">{t("email")}</label>
+            <input class="form-input" type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="consulta">{t("query")}</label>
+            <textarea class="form-input" id="consulta" name="consulta" rows="5" required></textarea>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">{t("send_button")}</button>
+        </div>
+    </form>
+</Layout>

@@ -1,0 +1,25 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { locales } from "../../../i18n.js";
+import { formatDate, getPosts } from "../../../medium.js";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return locales.flatMap((locale) =>
+    posts.map((entry) => ({ params: { locale, slug: entry.slug }, props: { entry } })),
+  );
+}
+
+const { locale } = Astro.params;
+const { entry } = Astro.props;
+---
+<Layout locale={locale}>
+    <h1>Blog</h1>
+    <div class="blog-entry">
+        <h2>{entry.title}</h2>
+        <p> <icon class="icon icon-time"></icon>&nbsp; {formatDate(entry.date)}</p>
+        <div set:html={entry.content} />
+        <br>
+        <a href={`/${locale}/blog`} class="float-right">&lt; Blog</a>
+    </div>
+</Layout>
