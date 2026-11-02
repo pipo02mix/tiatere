@@ -1,8 +1,12 @@
 ---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/newsreader/opsz.css";
 import { useTranslations } from "../i18n.js";
 
 const { locale, title } = Astro.props;
 const t = useTranslations(locale);
+const pages = ["about-me", "blog", "curriculum", "contact"];
+const current = pages.find((page) => Astro.url.pathname.startsWith(`/${locale}/${page}`));
 ---
 <!doctype html>
 <html lang={locale}>
@@ -11,59 +15,31 @@ const t = useTranslations(locale);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{title ? `Fernando Ripoll · ${title}` : "Fernando Ripoll"}</title>
         <meta name="description" content={t("site_description")}>
-        <link rel="stylesheet" href="/css/spectre.css">
+        <link rel="stylesheet" href="/css/site.css">
     </head>
     <body>
-        <section class="section section-header bg-gray">
-            <section class="grid-header container grid-960">
-                <nav class="navbar">
-                    <section class="navbar-section">
-                        <a href="#sidebar" class="btn btn-lg btn-link btn-action"><i class="icon icon-menu"></i></a>
-                        <a href="/" class="navbar-brand mr-10">
-                            <div class="popover popover-bottom tile">
-                                <img src="/images/logo.png">
-                                <div class="popover-container">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <p class="tile-subtitle text-size-mini text-gray">{t("tiatere_why")}</p>
-                                            <p class="tile-subtitle text-size-mini text-gray">{t("tiatere_why_explanation")}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </section>
-
-                    <section class="navbar-section">
-                        <div class="float-right">
-                            <a href="/es">es</a>
-                            &nbsp;|&nbsp;
-                            <a href="/en">en</a>
-                            &nbsp;&nbsp;
-                        </div>
-                        <a href="https://github.com/pipo02mix" target="_blank" class="social-link icon-svg"><img
-                                    src="/icons/github.svg" alt=""></a>
-                        <a href="https://twitter.com/pipo02mix" target="_blank" class="social-link icon-svg"><img
-                                    src="/icons/twitter.svg" alt=""></a>
-                    </section>
+        <div class="page">
+            <header class="site-header">
+                <a href={`/${locale}/about-me`} class="site-name">Fernando Ripoll</a>
+                <nav class="site-nav">
+                    {pages.map((page) => (
+                        <a href={`/${locale}/${page}`} aria-current={current === page ? "page" : undefined}>{t(page)}</a>
+                    ))}
+                    <span class="lang">
+                        <a href="/es" aria-current={locale === "es" ? "true" : undefined}>es</a>
+                        /
+                        <a href="/en" aria-current={locale === "en" ? "true" : undefined}>en</a>
+                    </span>
                 </nav>
-            </section>
-        </section>
-        <section class="container grid-960">
-            <div class="columns">
-                <div id="sidebar" class="docs-sidebar column col-3">
-                    <ul class="docs-nav nav">
-                        <li class="nav-item"><a href={`/${locale}/about-me`}>{t("about-me")}</a></li>
-                        <li class="nav-item"><a href={`/${locale}/blog`}>{t("blog")}</a></li>
-                        <li class="nav-item"><a href={`/${locale}/curriculum`}>{t("curriculum")}</a></li>
-                        <li class="nav-item"><a href={`/${locale}/contact`}>{t("contact")}</a></li>
-                    </ul>
-                </div>
-                <a href="#sidebar-close" id="sidebar-close" class="docs-nav-clear"></a>
-                <div class="col-12 column mb-10">
-                    <slot />
-                </div>
-            </div>
-        </section>
+            </header>
+            <main>
+                <slot />
+            </main>
+            <footer class="site-footer">
+                <a href="https://github.com/pipo02mix">GitHub</a>
+                <a href="https://twitter.com/pipo02mix">Twitter</a>
+                <a href="mailto:info@tiatere.es">info@tiatere.es</a>
+            </footer>
+        </div>
     </body>
 </html>

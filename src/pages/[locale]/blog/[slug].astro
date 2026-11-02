@@ -14,12 +14,10 @@ const { locale } = Astro.params;
 const { entry } = Astro.props;
 ---
 <Layout locale={locale} title={entry.title}>
-    <h1>Blog</h1>
-    <div class="blog-entry">
-        <h2>{entry.title}</h2>
-        <p> <icon class="icon icon-time"></icon>&nbsp; {formatDate(entry.date)}</p>
+    <article class="post">
+        <h1>{entry.title}</h1>
+        <p class="meta">{formatDate(entry.date)}</p>
         <div set:html={entry.content} />
-        <br>
-        <a href={`/${locale}/blog`} class="float-right">&lt; Blog</a>
-    </div>
+        <a href={`/${locale}/blog`}>← Blog</a>
+    </article>
 </Layout>

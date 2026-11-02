@@ -14,7 +14,7 @@ const entries = await getListedPosts(3);
     {entries.map((entry) => (
         <div class="blog-entry">
             <h3><a href={`/${locale}/blog/${entry.slug}`}>{entry.title}</a></h3>
-            <p> <icon class="icon icon-time"></icon>&nbsp; {formatDate(entry.date)}</p>
+            <p class="meta">{formatDate(entry.date)}</p>
             <p set:html={excerpt(entry.content)} />
         </div>
     ))}
