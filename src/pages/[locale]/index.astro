@@ -1,13 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { localePaths, useTranslations } from "../../i18n.js";
-import { formatDate, getListedPosts } from "../../medium.js";
+import { formatDate, getPosts } from "../../blog.js";
 
 export const getStaticPaths = localePaths;
 
 const { locale } = Astro.params;
 const t = useTranslations(locale);
-const entries = await getListedPosts(3);
+const entries = (await getPosts()).slice(0, 3);
 ---
 <Layout locale={locale}>
     <h1>{t("home_headline")}</h1>
@@ -16,9 +16,9 @@ const entries = await getListedPosts(3);
     <h2 class="section-label">{t("latest_posts")}</h2>
     <div class="post-list">
         {entries.map((entry) => (
-            <a href={`/${locale}/blog/${entry.slug}`}>
-                <span class="post-list-title">{entry.title}</span>
-                <span class="meta">{formatDate(entry.date)}</span>
+            <a href={`/${locale}/blog/${entry.id}`}>
+                <span class="post-list-title">{entry.data.title}</span>
+                <span class="meta">{formatDate(entry.data.date)}</span>
             </a>
         ))}
     </div>
