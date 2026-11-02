@@ -3,9 +3,22 @@ const TO = "info@tiatere.es";
 const LOCALES = ["es", "en"];
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// These live here and not in a _redirects file, because Cloudflare skips
+// _redirects for requests that no static asset matches, and none of these
+// paths has one.
+const REDIRECTS = {
+  "/": ["/es", 302],
+  "/es/about-me": ["/es", 301],
+  "/en/about-me": ["/en", 301],
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const redirect = REDIRECTS[url.pathname];
+    if (redirect) {
+      return Response.redirect(new URL(redirect[0], request.url), redirect[1]);
+    }
     if (url.pathname === "/api/contact" && request.method === "POST") {
       return handleContact(request, env);
     }
