@@ -227,6 +227,19 @@ pre {
   gap: 16px;
 }
 
+/* Markdown output has no wrappers, so the flex gap above doesn't reach it. */
+.post-body > * + * {
+  margin-top: 16px;
+}
+
+.post-body > :is(h2, h3, h4) {
+  margin-top: 40px;
+}
+
+.post-body li + li {
+  margin-top: 8px;
+}
+
 /* Resume, talks and projects */
 
 .entries {
